@@ -38,12 +38,12 @@ const validate = () => {
     return;
   }
 
-  if (x.value > 1) {
-    x.value -= 1;
+  if (count.value > 1) {
+    count.value -= 1;
     return;
   }
 
-  x.value = 0;
+  count.value = 0;
   emit('success');
 };
 </script>
