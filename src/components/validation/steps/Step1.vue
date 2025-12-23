@@ -3,7 +3,7 @@ import { ref } from 'vue';
 
 const emit = defineEmits(['success', 'failure']);
 const validSerials = ['BPC-756-1N1M1G0', 'IKA-349-1N1M1G0'];
-const showError = ref(true);
+const showError = ref(false);
 const isValidating = ref(false);
 const isValid = ref(false);
 const validationId = ref<number>();
