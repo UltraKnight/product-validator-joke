@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const VALUES = [60, 500, 10];
+const VALUES = [60, 500, 10] as const;
 const emit = defineEmits(['success']);
 const isError = ref(false);
 const x = ref(VALUES[0]);
