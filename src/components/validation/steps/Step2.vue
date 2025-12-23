@@ -4,8 +4,8 @@ import { ref } from 'vue';
 const VALUES = [60, 500, 10] as const;
 const emit = defineEmits(['success']);
 const isError = ref(false);
-const x = ref(VALUES[0]);
-const count = ref(VALUES[0]);
+const x = ref<number>(VALUES[0]);
+const count = ref<number>(VALUES[0]);
 
 let debounceTimeout: number | null = null;
 const DEBOUNCE_DELAY = 800;
