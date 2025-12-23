@@ -5,15 +5,23 @@ const emit = defineEmits(['success']);
 const isError = ref(false);
 const x = ref(60);
 
+let debounceTimeout: number | null = null;
+const DEBOUNCE_DELAY = 800;
+
 const validate = () => {
   if (isError.value) return;
+
+  if (debounceTimeout) return;
+  debounceTimeout = window.setTimeout(() => {
+    debounceTimeout = null;
+  }, DEBOUNCE_DELAY);
 
   if (x.value === 60) {
     isError.value = true;
     setTimeout(() => {
       isError.value = false;
       x.value = 500;
-    }, 1000);
+    }, 5000);
     return;
   }
 
@@ -22,7 +30,7 @@ const validate = () => {
     setTimeout(() => {
       isError.value = false;
       x.value = 10;
-    }, 1000);
+    }, 5000);
     return;
   }
 
@@ -37,8 +45,11 @@ const validate = () => {
 </script>
 
 <template>
-  <div @click="validate" class="touch-area">
-    Toque nessa área {{ x }} vezes para confirmar presença humana.
+  <div v-if="!isError" @click="validate" class="touch-area">
+    <p>
+      Toque nessa área {{ x }} vezes <span class="touch-area__text--highlighted">DEVAGAR</span> para confirmar presença
+      humana. Toques rápidos serão considerados robôs.
+    </p>
   </div>
   <p v-if="isError" class="touch-area__error">Erro de validação! Recalculando...</p>
   <p v-else class="touch-area__hint">Faltam {{ x }} vez(es)</p>
@@ -59,13 +70,21 @@ const validate = () => {
   color: #94a3b8;
   font-size: 0.9rem;
 
+  &__text--highlighted {
+    color: #00cc44;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
   &__hint {
     font-size: 0.8rem;
     color: #0088ff;
   }
 
   &__error {
-    font-size: 1rem;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 1.5rem;
     color: #ff0044;
   }
 }
