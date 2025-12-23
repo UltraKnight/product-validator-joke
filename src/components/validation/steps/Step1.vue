@@ -27,7 +27,7 @@ const validate = (event: Event) => {
 
 <template>
   <div class="serial-number">
-    <input type="text" placeholder="Enter Serial Number" @input="validate" />
+    <input type="text" placeholder="Digite o número de série do produto" @input="validate" />
     <p v-if="isValidating" class="serial-number__hint">Validando serial... pode levar algumas horas...</p>
     <p v-else-if="isValid" class="serial-number__hint">Serial aceito! Você pode prosseguir.</p>
   </div>
