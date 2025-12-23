@@ -37,7 +37,7 @@ const validate = () => {
 </script>
 
 <template>
-  <div @touchend="validate" @click="validate" class="touch-area">
+  <div @click="validate" class="touch-area">
     Toque nessa área {{ x }} vezes para confirmar presença humana.
   </div>
   <p v-if="isError" class="touch-area__error">Erro de validação! Recalculando...</p>
