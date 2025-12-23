@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+const VALUES = [60, 500, 10];
 const emit = defineEmits(['success']);
 const isError = ref(false);
-const x = ref(60);
+const x = ref(VALUES[0]);
+const count = ref(VALUES[0]);
 
 let debounceTimeout: number | null = null;
 const DEBOUNCE_DELAY = 800;
@@ -20,7 +22,8 @@ const validate = () => {
     isError.value = true;
     setTimeout(() => {
       isError.value = false;
-      x.value = 500;
+      x.value = VALUES[1];
+      count.value = VALUES[1];
     }, 5000);
     return;
   }
@@ -29,7 +32,8 @@ const validate = () => {
     isError.value = true;
     setTimeout(() => {
       isError.value = false;
-      x.value = 10;
+      x.value = VALUES[2];
+      count.value = VALUES[2];
     }, 5000);
     return;
   }
@@ -52,7 +56,7 @@ const validate = () => {
     </p>
   </div>
   <p v-if="isError" class="touch-area__error">Erro de validação! Recalculando...</p>
-  <p v-else class="touch-area__hint">Faltam {{ x }} vez(es)</p>
+  <p v-else class="touch-area__hint">Faltam {{ count }} vez(es)</p>
 </template>
 
 <style lang="scss" scoped>
